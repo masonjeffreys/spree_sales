@@ -1,3 +1,8 @@
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Product Sale Prices"} %>
 
-<%= render 'spree/admin/sale_prices/form' %>
+<div id="add_sales_price_form" class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title"><%= Spree.t('edit_product_sale_prices') %></h1>
+  </div>
+	<%= render 'spree/admin/sale_prices/form' %>
+</div>

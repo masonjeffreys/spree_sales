@@ -1,7 +1,12 @@
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Product Sale Prices"} %>
 <%= csrf_meta_tag %>
 
-<%= render 'spree/admin/sale_prices/form' %>
+<div id="add_sales_price_form" class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title"><%= Spree.t('add_product_sale_prices') %></h1>
+  </div>
+	<%= render 'spree/admin/sale_prices/form' %>
+</div>
 
 <div id="product-sale-prices-table">
   <%= render partial: "table", locals: { product: @product } %>
