@@ -7,18 +7,18 @@
         <div class="col-md-4 form-group">
           <%= f.fields_for :calculator do |ff| %>
             <%= ff.label :type %>
-            <%= ff.select :type, options_for_select(sale_calculators, selected: ff.object.type), {}, class: 'select2' %>
+            <%= ff.select :type, options_for_select(sale_calculators, selected: ff.object.type), {}, class: 'select2 fullwidth' %>
           <% end %>
         </div>
 
         <div class="col-md-4 form-group">
           <%= f.label :currency %>
-          <%= select_tag "sale_price[currency]", spree_sale_currencies, class: 'select2' %>
+          <%= select_tag "sale_price[currency]", spree_sale_currencies, class: 'select2 fullwidth' %>
         </div>
 
         <div class="col-md-4 form-group">
           <%= f.label :price_id %>
-          <%= f.select :price_id, options_for_select(@prices, selected: f.object.price_id), {}, class: 'select2' %>
+          <%= f.select :price_id, options_for_select(@prices, selected: f.object.price_id), {}, class: 'select2 fullwidth' %>
         </div>
       </div>
 

@@ -66,11 +66,11 @@ module Spree
             [variant.id, variant.sku_and_options_text]
           end
           @variants.insert(0, [:all_variants, Spree.t(:all_variants)])
-          @prices = @product.prices.includes(:store).map do |price|
+          @prices = @product.prices.includes(:store, :variant).order("created_at DESC").map do |price|
             if price.store
-              ["#{price.store.code}: #{price.display_original_price.to_html}", price.id]
+              ["[#{price.store.code}] #{price.variant.sku} - #{price.display_original_price.to_html}", price.id]
             else
-              ["no store: #{price.display_original_price.to_html}", price.id]
+              ["[no store] #{price.variant.sku} - #{price.display_original_price.to_html}", price.id]
             end
           end
         end
