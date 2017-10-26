@@ -2,7 +2,7 @@ Spree::Variant.class_eval do
 
   has_many :sale_prices, through: :prices
 
-  delegate_belongs_to :default_price, :sale_price, :original_price, :on_sale?
+  delegate :sale_price, :original_price, :on_sale?, to: :default_price
 
   def put_on_sale value, params={}
     if !params[:currency] or params[:currency] == 'all_currencies' or params[:currency] == :all_currencies
@@ -39,6 +39,14 @@ Spree::Variant.class_eval do
 
   def original_price_in(currency)
     Spree::Price.new variant_id: self.id, currency: currency, amount: price_in(currency).original_price
+  end
+
+  def display_original_price
+    self.original_price_in(current_currency).display_price
+  end
+
+  def display_sale_price
+    self.sale_price_in(current_currency).display_price
   end
 
   def enable_sale(all_currencies = true)

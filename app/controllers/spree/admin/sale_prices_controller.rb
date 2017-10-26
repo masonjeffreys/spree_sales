@@ -9,6 +9,7 @@ module Spree
       # Show all sale prices for a product
       def index
         @sale_price = Spree::SalePrice.new
+        @sale_price.calculator = Spree::Calculator.new
       end
 
       # Create a new sale price
@@ -21,6 +22,23 @@ module Spree
         else
           render :index
         end
+      end
+
+      # Edit a sale price
+      def edit
+        @sale_price = Spree::SalePrice.find(params[:id])
+      end
+
+      # Update a sale price
+      def update
+        @sale_price = Spree::SalePrice.find(params[:id])
+        if @sale_price.update(sale_price_params)
+          flash[:success] = "Saved the updates"
+          redirect_to admin_product_sale_prices_path(@product)          
+        else
+          flash[:error] = "Error saving your updates"
+          render 'edit'
+        end 
       end
 
       # Destroy a sale price
@@ -58,7 +76,8 @@ module Spree
             :end_at,
             :currency,
             :variant,
-            :calculator
+            :display_text,
+            calculator_attributes: [:type]
           )
         end
     end

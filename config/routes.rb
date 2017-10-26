@@ -1,7 +1,7 @@
 Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :products do
-      resources :sale_prices, only: [:index, :create, :destroy]
+      resources :sale_prices, only: [:index, :create, :destroy, :edit, :update]
     end
   end
 

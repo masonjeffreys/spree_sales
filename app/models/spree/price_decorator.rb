@@ -62,6 +62,16 @@ Spree::Price.class_eval do
     price
   end
 
+  def display_sales_price
+    sale_price_obj = on_sale? ? active_sale : nil
+    return nil unless sale_price_obj
+    Spree::Money.new(sale_price_obj.new_amount, {currency: currency})
+  end
+
+  def display_original_price
+    Spree::Money.new(self[:amount], {currency: currency})
+  end
+
   def enable_sale
     return nil unless next_active_sale.present?
     next_active_sale.enable

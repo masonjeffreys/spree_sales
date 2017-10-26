@@ -3,6 +3,7 @@
 
 en:
   spree:
+    save_sale_price: "Save sale price"
     sale_price: "Sale Price"
     original_price: "Original Price"
     product_sale_prices: "Product Sale Prices"
@@ -18,6 +19,7 @@ en:
       percent_off_sale_price_calculator:
         name: Percent off sale price
     all_currencies: All in use
+    sales_info: Sales info
   activerecord:
     attributes:
       spree/sale_price:

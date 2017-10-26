@@ -1,4 +1,4 @@
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @sale_price } %>
+<%= render partial: 'spree/shared/error_messages', locals: { target: @sale_price } %>
 
 <div id="add_sales_price_form" class="panel panel-default">
   <div class="panel-heading">
@@ -8,8 +8,10 @@
     <%= form_for [:admin, @product, @sale_price] do |f| %>
       <div class="row">
         <div class="col-md-4 form-group">
-          <%= f.label :calculator %>
-          <%= f.select :calculator, sale_calculators, {}, {:class => 'select2'} %>
+          <%= f.fields_for :calculator do |ff| %>
+            <%= ff.label :type %>
+            <%= ff.select :type, options_for_select(sale_calculators, selected: ff.object.type), {}, class: 'select2' %>
+          <% end %>
         </div>
 
         <div class="col-md-4 form-group">
@@ -24,22 +26,30 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 form-group">
+        <div class="col-md-6 form-group">
           <%= f.label :value, raw(Spree.t(:sale_price) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :value, class: "form-control", required: true %>
         </div>
 
-        <div class="col-md-4 form-group">
+        <div class="col-md-6 form-group">
+          <%= f.label :display_text %>
+          <%= f.text_field :display_text, class: "form-control" %>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
           <%= f.label :start_at, raw(Spree::SalePrice.human_attribute_name(:start_at) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :start_at, class: "datepicker form-control", required: true %>
         </div>
-        <div class="col-md-4 form-group">
+        <div class="col-md-6 form-group">
           <%= f.label :end_at %>
           <%= f.text_field :end_at, class: "datepicker form-control" %>
         </div>
       </div>
       <div class="form-actions text-center" data-hook="buttons">
-        <%= f.submit Spree.t("add_product_sale_prices"), class: 'btn btn-primary' %>
+        <%= f.submit Spree.t(:save_sale_price), class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div>

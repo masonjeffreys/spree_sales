@@ -36,7 +36,5 @@ Spree::BaseHelper.class_eval do
     calculators = Spree::SalesConfiguration::Config.calculators.map do |calculator|
       [Spree.t("sale_calculators.#{calculator.name.demodulize.underscore}.name"), calculator.name]
     end
-
-    options_for_select(calculators)
   end
 end

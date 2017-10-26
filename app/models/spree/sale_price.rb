@@ -1,6 +1,7 @@
 module Spree
   class SalePrice < ActiveRecord::Base
-    attr_accessor :currency, :variant
+
+    attr_accessor :currency, :variant, :display_text
 
     # TODO validations
     belongs_to :default_price, :class_name => "Spree::Price", :foreign_key => "price_id"
@@ -15,7 +16,7 @@ module Spree
     validates_presence_of :start_at
     validates :end_at, date: { after: :start_at, allow_blank: true }
 
-    delegate_belongs_to :default_price, :currency
+    delegate :currency, to: :default_price
 
     scope :active, -> { where(enabled: true).where('(start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)', Time.now, Time.now) }
 
