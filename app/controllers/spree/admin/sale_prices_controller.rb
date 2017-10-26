@@ -66,6 +66,13 @@ module Spree
             [variant.id, variant.sku_and_options_text]
           end
           @variants.insert(0, [:all_variants, Spree.t(:all_variants)])
+          @prices = @product.prices.includes(:store).map do |price|
+            if price.store
+              ["#{price.store.code}: #{price.display_original_price.to_html}", price.id]
+            else
+              ["no store: #{price.display_original_price.to_html}", price.id]
+            end
+          end
         end
 
         # Sale price params

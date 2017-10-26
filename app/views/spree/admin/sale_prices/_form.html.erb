@@ -20,8 +20,8 @@
         </div>
 
         <div class="col-md-4 form-group">
-          <%= f.label :variant %>
-          <%= select_tag "sale_price[variant]", options_from_collection_for_select(@variants, :first, :last, @product.master.id), class: 'select2' %>
+          <%= f.label :price_id %>
+          <%= f.select :price_id, options_for_select(@prices, selected: f.object.price_id), {}, class: 'select2' %>
         </div>
       </div>
 
