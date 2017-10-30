@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_sales'
-  s.version     = '3.1.2'
+  s.version     = '3.1.3'
   s.summary     = 'Add sales prices to products'
   s.description = 'Add sales prices to products'
   s.required_ruby_version = '>= 2.1.0'
@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.homepage  = 'http://www.acid.cl'
   s.license   = 'MIT'
 
-  #s.files       = `git ls-files`.split("\n")
-  #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.files       = `git ls-files`.split("\n")
+  s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
