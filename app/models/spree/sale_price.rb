@@ -32,8 +32,22 @@ module Spree
       super attrs
     end
 
+    # TODO - Merge this method and active scope so that definition is only in 1 place
+    def is_active?
+      n = Time.now.utc
+      if self.enabled and ( start_at <= n or start_at == nil ) and ( end_at >= n or end_at == nil )
+        true
+      else
+        false
+      end
+    end
+
     def calculator_type
       calculator.class.to_s if calculator
+    end
+
+    def short_calculator_type
+      self.calculator_type.demodulize
     end
 
     def new_amount
@@ -57,6 +71,30 @@ module Spree
 
     def stop
       update_attributes({ end_at: Time.now, enabled: false })
+    end
+
+    def descriptive_name
+      if self.is_active?
+        "Active #{self.short_calculator_type} [#{self.nice_date_range}]"
+      else
+        "Inactive #{self.short_calculator_type} [#{self.nice_date_range}]"
+      end
+    end
+
+    def nice_date_range
+      if self.start_at == nil and self.end_at == nil
+        "no date range"
+      else
+        "#{self.nice_start_at} : #{self.nice_end_at}"
+      end
+    end
+
+    def nice_start_at
+      self.start_at == nil ? "-" : self.start_at.strftime("%m/%d/%Y at %I:%M%p")
+    end
+
+    def nice_end_at
+      self.end_at == nil ? "-" : self.end_at.strftime("%m/%d/%Y at %I:%M%p")
     end
 
     # Convenience method for displaying the price of a given sale_price in the table

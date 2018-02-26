@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_sales'
-  s.version     = '3.1.1'
+  s.version     = '3.1.4'
   s.summary     = 'Add sales prices to products'
   s.description = 'Add sales prices to products'
   s.required_ruby_version = '>= 2.1.0'
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'solidus_core', '~> 2.2'
+  s.add_dependency 'solidus_core', '~> 2.4'
   s.add_dependency 'date_validator'
 
 
