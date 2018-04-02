@@ -12,6 +12,7 @@ module SpreeSales
     end
 
     initializer "spree.register.sale_configuration", :before => :load_config_initializers do |app|
+      puts "--- registering sales config"
       Spree::SalesConfiguration::Config = Spree::SalesConfiguration.new
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::AmountSalePriceCalculator
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::PercentOffSalePriceCalculator
